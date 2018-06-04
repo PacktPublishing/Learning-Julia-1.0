@@ -1,0 +1,3 @@
+Section1 files are code fragments executed in Julia in small pieces to illustrate particular points about the Julia language. 
+They are not intended to be executed as a whole. 
+Although these files contain some explanatory text they are meant to be used with corresponding Section 1 Julia Videos
