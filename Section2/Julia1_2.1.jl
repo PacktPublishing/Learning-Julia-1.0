@@ -32,7 +32,7 @@ t=parse(Float32,st)  #string to Float32 conversion for t
 # EQ1: .5g*td^2 - vs*tu = 0
 # EQ2: td+tu=t => tu=t-td subsitute in EQ1 and get
 # quadratic .5g*td^2 + vs*td -vs*t = 0  in t1
-td = (-vs + sqrt(vs^2 +2.0g*vs*t))/g
+td = (-vs + sqrt(vs^2 + 2.0g*vs*t))/g
 tu = t - td
 depthu = vs*tu
 println("depth $depthu meters\n sound time $tu seconds")
@@ -47,13 +47,14 @@ println("terminal velocity $termv meters/second")
 # some simple files IO to read and write CSV text files.
 fi1=open("str1.csv")
 fo1=open("str2.csv","w")
-count=1
+cnt=1
 while(!eof(fi1))
+  global cnt
   row=readline(fi1)
-  row="$count,"*row*"\n"
+  row="$cnt,"*row*"\n"
   write(fo1,row)
   print(row)
-  count+=1
+  cnt+=1
 end
 close(fi1)
 close(fo1)

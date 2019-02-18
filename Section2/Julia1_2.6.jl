@@ -3,35 +3,25 @@
 # String character addressing 1 to end
 # The first byte of a UTF-8 multibyte character
 # will yield the character, the other bytes cause exceptions
-s="Abcπ∑z\u2200" # or s=string("Abcπ∑z∀")
-# ∀ 'for each operator (eg. ∀x∈S for each x belonging to S)
+s="Abcπ∑z\u2200\n" # or s=string("Abcπ∑z∀")
+# ∀ for each operator (eg. ∀x∊S for each x belonging to set S)
 
 println(sizeof(s)) # total number of bytes in string
-
-println(s[5]) # this will cause an exception since continuation byte
-
-# This works but relies on print errors:
-for i = 1:sizeof(s) # or 1:endof(S)
-    try print(s[i])
-    catch  # ignore continuation byte error
-    end
-end
-# To avoid print having to catch errors
-i=1
-while i<=endof(s)  # rng=1 to byte addr of last char
-    print(s[i])
-    i=nextind(s,i)  # yields next character
-end
-# but better to do this instead:
+println(length(s)) # length in characters
+# best way to deal with each character
 for c in s
-    print(c)
+    println(c)
 end
+
 # and this can become a one liner using ";"
 for c in s; print(c); end
 
-# string concatenation - 3 ways
+println(s[5]) # this will cause an exception since continuation byte
+
 name="Mike"
-s=string("Hi ",name,",\n") # Converts and concatenates
+n=76
+s=string("Hi ",name,n,30,"  ",π,",\n") # Converts and concatenates
+
 # julia uses * for concatenation
 #  rather than + (+ implies communtative)
 s="Hi "*name*",\n"
@@ -39,9 +29,19 @@ s="Hi "*name*",\n"
 s="Hi $name,\n"  # String() not necessary
 
 # The $ operator can also be used to evaluate expressions
-s="Hi $(sqrt(π+1)),\n"
+n=63
+s="Hi $(sqrt(n+1)),\n"
 
-search(s,'9') # find an 8 in the π+1 String
+# triple quote used for embedded quotes and indentation
+lem="""
+         The lead lemming said, "Jump!"
+         and they all did.
+    """
+println(lem)
+
+for i=0x2200:0x2240; print(Char(i)); end # interesting symbols
+
+###
 
 t='a'*'z'
 u='z'-'a'
@@ -51,6 +51,31 @@ w='a'+'b' # meaningless so error
 # character comparisons
 'A'<='X'<='Z'   # true comparison
 'A'<='a'<='Z'   #false comparison
+
+# lexicographic ordering using < > <= >= == !=
+"abacus"<"zoo"   # true
+"Zoo"<"abacus"   # true because 'Z'<'a'Char'
+"Zoo"<"Abacus"   # false
+"α"<"𝛂"          # true because first alpha from lower greek alphabet.
+
+s="πAbc∑z\u2200\n"
+t=chomp(s)
+chop(t)
+lowercase(t)
+uppercase(t)
+t[end]
+first(t)
+last(t)
+split(t,'∑')
+strip("   "*t*"  ")
+i=1   # all strings start at 1.
+t[i]
+i=nextind(t,i)
+t[i]
+textwidth(s)
+
+
+###
 
 # regular expressions (type Regex)- Perl compatible
 # see www.pcre.org
@@ -87,19 +112,20 @@ Other metacharacters
 # Test to make sure password not all alpha
 i=0
 while(i==0)
+    global i
     passwd=readline()
-    if ismatch(r"^[A-Za-zα-ω]*$",passwd)
-        println("all alpha, try again")
-    else
+    if match(r"^[A-Za-zα-ω]*$",passwd) === nothing
         println("password good")
         i=1
+    else
+        println("all alpha, try again")
     end
 end
 
 # pick time out of text
 linewithtime="a good holiday weekend, its 15:45 and sunny."
 m=match(r"(?<hour>\d+):(?<minute>\d+)",linewithtime)
-println(m[:hour]*":"m[:minute])
+println(m[:hour]*":"*m[:minute])
 
 # For more read Redex Cheat Sheet at:
 #   www.rexegg.com/regex-quickstart.html

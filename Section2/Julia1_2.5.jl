@@ -13,7 +13,6 @@ hg=80
 s2=string("xy",3,Char(0x3B1),false,s1,hg) # function converts UTF-8
 println(s2)
 println(sizeof(s2))   # Number of bytes
-println(endof(s1))    # Byte address of last character
 println(length(s1))   # number of characters
 # translate a UTF-8 string to a vector of UInt8,
 #  UInt16, UInt32 or vice-versa
@@ -22,13 +21,12 @@ t=transcode(UInt8,s)
 
 a1=ascii(s)  # Will convert to an ascii string or error
 #    if non-ascii (used to send strings to a C routine)
-a1=ascii(s1)
+a1=ascii(s1) # will report invalid ascii character
 
 println(s1)
 a2=transcode(UInt32,s1)  # can make 32-bit Char Vector.
 println(a2)
 println(sizeof(a2))   # Number of bytes
-println(endof(a2))    # word address of last character
 println(length(a2))   # number of 32-bit character
 
 
@@ -36,7 +34,7 @@ println(length(a2))   # number of 32-bit character
 #    if they are what you want
 #  I always use the hexadecimal representations of the Unicode
 Char(0x3B3)
-hex('γ')  # to see the hex Unicode for a character
+'γ'  # to see the hex Unicode for a character
 Char(0x3C6)
 Char(0x3C9)  # Greek alphabet 0x3B1 through 0x3C9.
 Char(0x263A)

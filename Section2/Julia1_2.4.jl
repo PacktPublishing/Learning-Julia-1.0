@@ -1,17 +1,18 @@
 # Julia1_2.4.jl Operators and Elementary Math Functions
 #
-#Operators + _ * / \ ^
+#Operators + - * / \ ^
+e=Base.MathConstants.e
 a=2//3 + 3.4*π/e
 b=(3//4)^2 - 55\5  # x=a\b is x=b/a
 
-V=[1 2 3]    # vector
+V=[1, 2, 3]    # vector
 3V
 
 M=[1 2; 3 4] # 2x2 matrix
 Y=3M         # * implied, 3* each entry
 
 Z1=M/3  # matrix M divided by 3
-Z2=3\M  # same result
+Z2=3\M  # divide into -- same result
 
 W1=(3+3im)\M
 W2=(3+3im)W1
@@ -19,7 +20,7 @@ W2=(3+3im)W1
 i=0
 i+=1
 M*=2 # Stays integer, all antries times 2
-M-=1 # Stays integer, -1 from each entry
+M.-=1 # Stays integer, -1 from each entry
 M*=2.0 # now floating, all entries * 2.0
 # Special functions for complex numbers
 real(1+2im)
