@@ -6,7 +6,7 @@
 # So for efficiency we restrict the call parameters using
 #  type assertion operators so that the operations
 #  in the expression π*h*r^2 won't have to decide.
-cylinder(r::Float64,h::Float64) = π*h*r^2
+cylinder(r::Float64,h::Float64) = π*h*r^2  # for cylinder volume
 println(cylinder(5.0,20.0))
 println(cylinder(5,20.0))
 println(typeof(5))
@@ -14,7 +14,7 @@ println(typeof(5))
 # Generalizing but still efficient for Float64 since it
 # will use method 1.
 # The most specific specifications take dispatch priority
-cylinder(r::Real,h::Real) = π*h*r^2
+cylinder(r::Real,h::Real) = π*h*r^2   # for cylinder volume
 println(cylinder(5,20.0))
 
 methods(cylinder) # we defined 2 methods for cylinder
@@ -23,6 +23,8 @@ methods(cylinder) # we defined 2 methods for cylinder
 #  r and h would be of type 'any' which includes
 #  Number, String, Char or any user defined type, often
 #    undesirable
+cuboid(l,h,d)=l*h*d   # will even take strings without complaining
+cuboid("This"," is ","wrong!")
 
 # perhaps want functions to check if types match
 sametype(x::T, y::T) where {T}=true

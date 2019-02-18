@@ -1,7 +1,8 @@
 # Julia1_3.3.jl Tasks/Coroutines and Channels
 #
 # Using Tasks
-s1() = sum(i for i=1:1000) # function to sum 1 to 1000
+s1() = sum(i for i=1:1000000) # function to sum 1 to 1000
+s1() = sum(1:1000000)         # shorthand for the same thing
 st=Task(s1)       # turn function s1 into task st
 schedule(st)      # schedule task to run
 istaskstarted(st) # true if started
@@ -18,10 +19,10 @@ current_task()
 yield()
 
 
-# Using Channels
+# Using Channels using a coroutine
 in1=open("data1.csv") # Opening a test data file
-c=Channel{Int64}(16)  # defining a 16 word FIFO
-function getdata()    # defining a function getdata()
+c=Channel{Int64}(16)  # defining a 16 word FIFO buffer
+function getdata()    # defining a function getdata() a coroutine
     while true        # inf while loop
         s=readline(in1)             # read line as String
         if length(s)==0; break; end # if null loop done
@@ -31,7 +32,7 @@ function getdata()    # defining a function getdata()
 end
 gt=Task(getdata) # make getdata into a task
 schedule(gt)     #schedule it
-take!(c)         # take an Int64 from channel c
+if isready(c); take!(c); end         # take an Int64 from channel c
 
 current_task()   # what is the currently running task
 
