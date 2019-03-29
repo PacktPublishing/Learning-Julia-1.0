@@ -18,19 +18,25 @@ end
 # handling different cases
 
 # watch out for x=1//3; y=1/3, won't be equal
+# however rationalize(1/3)==1//3
+# 1 ≈ 0.999999999 where ≈ means approximately equal
+# 3.825==153/40 this is false
+# 3.825≈153/40  this is true
 
 # one liner conditional borrowed from C
 # cond? true-expr:false-expr
 x=-2
-y = x<0? -x: x  # gets absolute value of x
+y = x<0 ? -x : x  # gets absolute value of x
 # same as y=abs(x)
 
 # other one liner conditional executions
 # if <cond>; <expression>; end can be reduced to:
 #  where && read as "and then"
+x=-3
 x<0 && (x=-x) # if x<0 and then x set to -x
 # if !<cond>; <expression>; end   can be reduced to:
 #  where || read as "or else"
+x=-4
 !(x<0) || (x=-x) # if not x<0 bypass else x set to -x
 # in this case both perform x=abs(x)
 
