@@ -10,7 +10,7 @@ println(sizeof(s)) # total number of bytes in string
 println(length(s)) # length in characters
 # best way to deal with each character
 for c in s
-    println(c)
+    print(c)
 end
 
 # and this can become a one liner using ";"
@@ -24,10 +24,9 @@ s=string("Hi ",name,n,30,"  ",π,",\n") # Converts and concatenates
 
 # julia uses * for concatenation
 #  rather than + (+ implies communtative)
-s="Hi "*name*",\n"
+s="Hi "*name*",/n"
 
-s="Hi $name,\n"  # String() not necessary
-
+s="hi $name,\n"   # so using String is not necessary
 # The $ operator can also be used to evaluate expressions
 n=63
 s="Hi $(sqrt(n+1)),\n"
@@ -64,10 +63,11 @@ chop(t)
 lowercase(t)
 uppercase(t)
 t[end]
-first(t)
-last(t)
+first(t)  # all strings start at 1.
+Last(t)
 split(t,'∑')
-strip("   "*t*"  ")
+strip("   "*t*"   ")
+textwidth(s)
 i=1   # all strings start at 1.
 t[i]
 i=nextind(t,i)
