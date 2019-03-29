@@ -51,5 +51,4 @@ Rational(3.875) # Make a rational fraction out of a Float
 Rational(3.825) # a repeating binary pattern so not exact, use rationalize() function
 BigFloat(3.825) # gives wrong precision due to prior conversion step
 BigFloat(3825//1000) # or
-BigFloat("3.825")    # or
-big"3.825" #any of these work
+BigFloat("3.825")
