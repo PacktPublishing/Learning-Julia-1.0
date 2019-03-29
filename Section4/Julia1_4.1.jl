@@ -52,4 +52,6 @@ stat("wellin.dat") # yields string, list of file parameters
 # mode=6 Owner R&W, =4 Group R only, =4 Others R only
 # uperm(file) user permission, gperm(file) group permission
 # operm(file) other permission
+
 chmod("wellout.csv",0o664)
+stat("wellout.csv")
