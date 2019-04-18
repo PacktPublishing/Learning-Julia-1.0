@@ -17,10 +17,9 @@ A complete course packed with step-by-step instructions, working examples, and h
 
 ## Instructions and Navigation
 ### Assumed Knowledge
-To fully benefit from the coverage included in this course, you will need:<br/>
-Some familiarity with another computer languages like C or Python will be helpful but not necessary
-High school mathematics is necessary
-Knowledge of matrix multiplication is also required
+<ul><li>Some familiarity with another computer languages like C or Python will be helpful but not necessary</li>
+<li>High school mathematics is necessary</li>
+<li>Knowledge of matrix multiplication is also required</li></ul>
 
 ### Technical Requirements
 This course has the following software requirements:<br/>
